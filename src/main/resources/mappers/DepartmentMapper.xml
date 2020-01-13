@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<mapper namespace="com.frog.dao.DepartmentMapper">
+
+  <select id="getDeptById" resultType="com.frog.bean.Department">
+        select * from department where id = #{id}
+    </select>
+
+  <insert id="addDept" parameterType="com.frog.bean.Department">
+        insert into department(name) values(#{name})
+    </insert>
+
+  <update id="updateDept">
+        update department set name=#{name} where id = #{id}
+    </update>
+
+  <delete id="deleteDeptById">
+        delete from department where id = #{id}
+    </delete>
+</mapper>
