@@ -3,7 +3,7 @@
 <mapper namespace="com.frog.dao.DepartmentMapper">
 
   <select id="getDeptById" resultType="com.frog.bean.Department">
-        select * from department where id = #{id}
+        select * from department where id = ?
     </select>
 
   <insert id="addDept" parameterType="com.frog.bean.Department">

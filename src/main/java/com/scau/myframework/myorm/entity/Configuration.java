@@ -26,6 +26,28 @@ public class Configuration {
      */
     private String password;
     /**
+     * 正在使用哪个数据库
+     */
+    private String usingDB;
+    /**
+     * 项目的源码路径
+     */
+    private String srcPath;
+    /**
+     * 扫描生成java类的包(po的意思是：Persistence object持久化对象)
+     */
+    private String poPackage;
+
+    /**
+     * 连接池的最小连接数
+     */
+    private Integer poolMinSize;
+
+    /**
+     * 连接池的最大连接数
+     */
+    private Integer poolMaxSize;
+    /**
      * 存储所有的mapper.xml对象
      */
     private Map<String,MappedStatement> mappedStatements = new HashMap<String,MappedStatement>();
@@ -60,6 +82,46 @@ public class Configuration {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsingDB() {
+        return usingDB;
+    }
+
+    public void setUsingDB(String usingDB) {
+        this.usingDB = usingDB;
+    }
+
+    public String getSrcPath() {
+        return srcPath;
+    }
+
+    public void setSrcPath(String srcPath) {
+        this.srcPath = srcPath;
+    }
+
+    public String getPoPackage() {
+        return poPackage;
+    }
+
+    public void setPoPackage(String poPackage) {
+        this.poPackage = poPackage;
+    }
+
+    public Integer getPoolMinSize() {
+        return poolMinSize;
+    }
+
+    public void setPoolMinSize(Integer poolMinSize) {
+        this.poolMinSize = poolMinSize;
+    }
+
+    public Integer getPoolMaxSize() {
+        return poolMaxSize;
+    }
+
+    public void setPoolMaxSize(Integer poolMaxSize) {
+        this.poolMaxSize = poolMaxSize;
     }
 
     public Map<String, MappedStatement> getMappedStatements() {

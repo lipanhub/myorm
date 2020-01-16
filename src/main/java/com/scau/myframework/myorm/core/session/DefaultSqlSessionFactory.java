@@ -1,4 +1,4 @@
-package com.scau.myframework.myorm.session;
+package com.scau.myframework.myorm.core.session;
 
 import com.scau.myframework.myorm.entity.Configuration;
 import com.scau.myframework.myorm.entity.MappedStatement;
@@ -19,17 +19,17 @@ import java.util.Properties;
  * @author: lipan
  * @time: 2020/1/13 20:44
  */
-public class SqlSessionFactory {
+public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
     private final Configuration configuration = new Configuration();
 
-    public SqlSessionFactory() {
+    public DefaultSqlSessionFactory() {
         loadDbInfo();
         loadMappersInfo();
     }
 
     private void loadDbInfo() {
-        InputStream dbIn = SqlSessionFactory.class.getClassLoader().getResourceAsStream("db.properties");
+        InputStream dbIn = DefaultSqlSessionFactory.class.getClassLoader().getResourceAsStream("db.properties");
         Properties properties = new Properties();
         try {
             properties.load(dbIn);
@@ -40,11 +40,16 @@ public class SqlSessionFactory {
         configuration.setUrl(properties.get("url").toString());
         configuration.setUser(properties.get("user").toString());
         configuration.setPassword(properties.get("password").toString());
+        configuration.setUsingDB(properties.get("usingDB").toString());
+        configuration.setSrcPath(properties.get("srcPath").toString());
+        configuration.setPoPackage(properties.get("poPackage").toString());
+        configuration.setPoolMinSize(Integer.parseInt(properties.get("poolMinSize").toString()));
+        configuration.setPoolMaxSize(Integer.parseInt(properties.get("poolMaxSize").toString()));
     }
 
     private void loadMappersInfo() {
         URL resources = null;
-        resources = SqlSessionFactory.class.getClassLoader().getResource("mappers");
+        resources = DefaultSqlSessionFactory.class.getClassLoader().getResource("mappers");
         File mappers = new File(resources.getFile());
         if (mappers.isDirectory()) {
             File[] listFiles = mappers.listFiles();
@@ -80,6 +85,7 @@ public class SqlSessionFactory {
         }
     }
 
+    @Override
     public SqlSession openSession() {
         return new DefaultSqlSession(configuration);
     }
